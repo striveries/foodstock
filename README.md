@@ -2,9 +2,9 @@
 FoodStock merupakan suatu aplikasi berbasis _website_ yang berfungsi sebagai platform untuk membantu pengelolaan inventori stok bahan makanan suatu bisnis FnB. Melalui aplikasi ini, pengguna dapat mengetahui stok bahan makanan dasar terkini, bahan makanan yang sudah perlu untuk dilakukan _restock_, hingga melakukan pendataan harga bahan makanan tersebut.
 
 ### Penyusun Proyek
-Nama : Calista Sekar
-NPM : 2206082064
-Kelas : C
+Nama : Calista Sekar    
+NPM : 2206082064    
+Kelas : C   
 
 ## Langkah-Langkah Development FoodStock
 ### Membuat sebuah proyek Django baru.
@@ -25,18 +25,18 @@ Kelas : C
 7. Setelah proyek dibuat, saya menambahkan `*` pada `ALLOWED_HOST` di file `setting.py` untuk mengizinkan semua host untuk mengakses aplikasi web.
 
 ### Membuat aplikasi dengan nama main pada proyek tersebut.
-1. Pada terminal direktori utama `foodstock`, saya mengaktifkan virtual enxironment untuk mengisolasi package dan dependencies sehingga tidak bertabrakan dengan versi lainnya pada laptop saya.
+1. Pada terminal direktori utama `foodstock`, saya mengaktifkan _virtual environment_ untuk mengisolasi _package_ dan _dependencies_ sehingga tidak bertabrakan dengan versi lainnya pada laptop saya.
 2. Untuk membuat aplikasi baru dengan nama `main`, saya menjalankan perintah `python manage.py startapp main`. Aplikasi baru ini
 berisi struktur awal yang akan menjadi pondasi aplikasi foodstock kedepannya.
-3. Sebelum mengimplementasikan template, saya mendaftarkan terlebih dahulu aplikasi main ke dalam proyek dengan menambahkan `main` pada `INSTALLED_APPS` di dalam berkas `setting.py`
-4. Selanjutnya, saya membuat direktori baru `templates` di dalam direktori aplikasi main serta membuat berkas baru bernama `main.html` yang akan berisikan landing page aplikasi FoodStock.
+3. Sebelum mengimplementasikan _template_, saya mendaftarkan terlebih dahulu aplikasi main ke dalam proyek dengan menambahkan `main` pada `INSTALLED_APPS` di dalam berkas `setting.py`
+4. Selanjutnya, saya membuat direktori baru `templates` di dalam direktori aplikasi main serta membuat berkas baru bernama `main.html` yang akan berisikan _landing page_ aplikasi FoodStock.
 
 ### Melakukan routing pada proyek agar dapat menjalankan aplikasi main.
 
 ### Membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib sebagai berikut.
-    * `name` sebagai nama item dengan tipe CharField.
-    * `amount` sebagai jumlah item dengan tipe IntegerField.
-    * `description` sebagai deskripsi item dengan tipe TextField.
+* `name` sebagai nama item dengan tipe CharField.
+* `amount` sebagai jumlah item dengan tipe IntegerField.
+* `description` sebagai deskripsi item dengan tipe TextField.
 
 Setelah memeriksa bahwa tampilan HTML aplikasi telah sesuai, saya membuat berkas baru `models.py` pada direktori aplikasi main. Berkas tersebut akan berisikan model yang akan digunakan pada aplikasi ini.
 ```
@@ -76,10 +76,10 @@ Untuk menerapkan migrasi ke basis data lokal, saya menjalankan perintah `python 
 **Penjelasan kode**
 - Fungsi `show_main` berfungsi untuk mengatur permintaan HTTP dan mengembalikan tampilan yang sesuai dengan request yang diterima
 - Pada dictionary `context`, saya menambahkan empat data, yaitu :
-    - name : data nama pengguna
-    - class : data kelas pengguna
-    - item_name : nama dari item yang didaftarkan
-    - amount : jumlah stok saat ini dari item yang didaftarkan
+    - `name` : data nama pengguna
+    - `class` : data kelas pengguna
+    - `item_name` : nama dari item yang didaftarkan
+    - `amount` : jumlah stok saat ini dari item yang didaftarkan
 4. Untuk menampilkan data yang telah diambil dari model, saya mengubah data yang telah ada di dalam berkas `main.html` pada direktori `main/template` sehingga nilainya dapat berubah bergantung pada apa yang telah didefinisikan dalam `context`
 ```
     <h1>Developer Page</h1>
@@ -98,7 +98,7 @@ Untuk menerapkan migrasi ke basis data lokal, saya menjalankan perintah `python 
 ```
 
 ### Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py
-1. Dalam direktori `main`, saya membuat berkas `urls.py` yang berfungsi untuk mengatur URL spesifik aplikasi ini, yaitu ke fungsi show_main pada berkas `views.py`. Pada berkas `urls.py`, saya menambahkan kode sebagai berikut :
+1. Dalam direktori `main`, saya membuat berkas `urls.py` yang berfungsi untuk mengatur URL spesifik aplikasi ini, yaitu ke fungsi `show_main` pada berkas `views.py`. Pada berkas `urls.py`, saya menambahkan kode sebagai berikut :
 ```
 from django.urls import path
 from main.views import show_main
@@ -110,7 +110,7 @@ urlpatterns = [
 ]
 ```
 
-2. Selain pada direktori main, saya juga memodifikasi kode pada berkas` urls.py` dalam direktori proyek `foodstock` dengan mengimpor fungsi include dan menambahkan rute URL. Berkas `urls.py` pada direktori ini berfungsi untuk mengarahkan rute URL di tingkat proyek sehingga memungkinkan aplikasi dalam proyek Django bersifat modular dan terpisah. 
+2. Selain pada direktori main, saya juga memodifikasi kode pada berkas `urls.py` dalam direktori proyek `foodstock` dengan mengimpor fungsi include dan menambahkan rute URL. Berkas `urls.py` pada direktori ini berfungsi untuk mengarahkan rute URL di tingkat proyek sehingga memungkinkan aplikasi dalam proyek Django bersifat modular dan terpisah. 
 ```
 from django.contrib import admin
 from django.urls import path, include
@@ -123,17 +123,18 @@ urlpatterns = [
 
 
 ### Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
-Aplikasi FoodStock sudah di-deploy ke platform Adaptable dan dapat diakses secara bebas pada [FoodStock](https://foodstock.adaptable.app/main/)
+Aplikasi FoodStock sudah di-_deploy_ ke platform Adaptable dan dapat diakses secara bebas pada [FoodStock](https://foodstock.adaptable.app/main/)
 
 ###  Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html
 
 ![Bagan Request Client ke Web Aplikasi berbasis Django](diagram-request.png)
 
+Ketika user mengirimkan _request_ kepada web, HTTP _request_ tersebut diproses oleh urls.py dan diarahkan ke View (views.py) yang sesuai. Setelah itu, View menghubungi Model (models.py) sehingga Model mengambil data yang dibutuhkan ke database. Data yang diterima dari Database kemudian diolah oleh Model dengan mengubah dan mengklasifikasikan tiap objek di Database menjadi kelas-kelas. Hasilnya kemudian dikirimkan ke View. Oleh View, data tersebut ditambahkan ke Template. Hasil dari penggabungan tersebut berbentuk berkas HTML. Hasil ini kemudian dikirimkan kembali ke Client sebagai HTTP Response.
 
 ###  Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
-Virtual environment berfungsi untuk mengisolasi package serta dependencies dari aplikasi sehingga tidak bertabrakan dengan versi lain yang ada pada komputer yang sama. Dengan virtual environment, kita dapat mengerjakan beberapa aplikasi/proyek dengan versi berbeda meski dengan modul yang sama. Selain itu, kita dapat mengontrol lingkungan pengembangan aplikasi dengan lebih baik sehingga proses pengembangan dan pemeliharaan aplikasi pun menjadi lebih mudah.
+_Virtual environment_ berfungsi untuk mengisolasi _package_ serta _dependencies_ dari aplikasi sehingga tidak bertabrakan dengan versi lain yang ada pada komputer yang sama. Dengan _virtual environment_, kita dapat mengerjakan beberapa aplikasi/proyek dengan versi berbeda meski dengan modul yang sama. Selain itu, kita dapat mengontrol lingkungan pengembangan aplikasi dengan lebih baik sehingga proses pengembangan dan pemeliharaan aplikasi pun menjadi lebih mudah.
 
-Kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment. Akan tetapi, tanpa penggunaan virtual environment, kemungkinan munculnya masalah terkait konflik versi atau manajemen dependensi proyek lebih besar. Oleh karena itu, penggunaan virtual environment dalam pengembangkan web berbasis Django sangat disarankan.
+Kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan _virtual environment._ Akan tetapi, tanpa penggunaan _virtual environment_, kemungkinan munculnya masalah terkait konflik versi atau manajemen dependensi proyek lebih besar. Oleh karena itu, penggunaan virtual environment dalam pengembangkan web berbasis Django sangat disarankan.
 
 ###  Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya
 - MVC (Model-View-Controller) adalah sebuah pola arsitektur dalam membuat sebuah aplikasi dengan cara memisahkan kode menjadi tiga bagian, yaitu Model, View, dan Controller. Karena dibagi menjadi tiga komponen atau unit, pemeliharaan dan pengoptimalan sistem jadi lebih mudah.

@@ -9,3 +9,16 @@ class mainTest(TestCase):
         response = Client().get('/main/')
         self.assertTemplateUsed(response, 'main.html')
         # untuk mengecek apakah template ditemukan dan berhasil digunakan
+
+    def test_main_response(self):
+        # mengirim request ke main app
+        response = Client().get('/main/')
+
+        # mengecek apakah template sudah sesuai
+        self.assertTemplateUsed(response, 'main.html')
+
+        # mengecek apakah data yang ditampilkan sudah sesuai
+        self.assertEqual(response.context['name'], 'Calista Sekar')
+        self.assertEqual(response.context['class'], 'PBP C')
+        self.assertEqual(response.context['item_name'], 'wortel')
+        self.assertEqual(response.context['amount'], '2')
