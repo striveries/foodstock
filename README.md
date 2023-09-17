@@ -147,3 +147,43 @@ Perbedaan utama dari ketiganya adalah pola pembagian komponen-komponennya
 - 'View' pada MVVM mirip dengan 'View' pada MVC yang mana berfungsi sebagai antarmuka grafis antara pengguna dan pola desain, serta menampilkan output dari data yang telah diproses.
 - 'ViewModel' pada MVVM merupakan abstraksi dari 'View' yang berfungsi sebagai pembungkus data model. 'ViewModel' berisi perintah yang dapat digunakan oleh 'View' untuk memengaruhi 'Model'
 
+## Tugas 3
+
+### Membuat input form untuk menambahkan objek model pada app sebelumnya.
+### Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+### Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
+
+### Apa perbedaan antara form POST dan form GET dalam Django?
+- Form POST dalam Django memunculkan data-nya pada bagian `message body` dari HTTP request. Sedangkan, pada form GET, semua data form dituliskan ke dalam URL dan di-append ke action URL sebagai parameter string query.
+- Pada Form GET, parameter data terbatas untuk hanya untuk hal yang bisa dicantumkan pada request line (URL). Sedangkan, pada form METHOD tidak ada masalah ini karena data-nya disimpan pada `message body` dari HTTP request, bukan URL.
+- Form GET memiliki batasan mengenai data yang bisa dikirim. Hanya karakter ASCII yang dapat dikirimkan melalui form GET. Selain itu, panjang string yang dikirimkan pun hanya terbatas sampai dengan 2047 karakter. Sedangkan, pada form POST, tidak ada batasan mengenai data yang bisa dikirimkan.
+- Form POST lebih aman dibandingkan form GET. Pada form GET, data dikirimkan sebagai bagian dari URL sehingga data tersebut dapat terbaca oleh siapapun. 
+
+
+### Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+- Dalam konteks fungsinya, HTML berfungsi untuk menampilkan data, sedangkan XML dan JSON berfungsi untuk menyimpan dan mengirimkan data. Oleh karena itu, jelas peran dari HTML dengan dua jenis representasi data lainnya berbeda.
+- Format penulisan antara XML dan JSON berbeda. JSON menggunakan struktur seperti peta dengan pasangan key-value. Sedangkan, XML menyimpan data dalam struktur pohon dengan namespace untuk kategori data yang berbeda. 
+- Tipe data yang bisa disimpan antara XML dan JSON berbeda. JSON mendukung tipe data angka, objek, string, dan array Boolean. Sedangkan, XML mendukung semua tipe data JSON serta beberapa tipe data lainnya seperti Boolean, tanggal, namespace.
+- Dari segi ukuran data, JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat. XML membutuhkan ukuran file yang lebih besar karena struktur penulisannya yang lebih kompleks untuk ditulis maupun dibaca.
+- Dari segi keamanan, JSON lebih aman dibandingkan XML. Hal ini karena struktur XML rentan terhadap terjadinya modifikasi yang tidak terautorisasi yang dikenal sebagai External Entity Injection (XXE). XML juga rentan terhadap terjadinya external document type declaration (DTD) yang tidak terstruktur. Akan tetapi, kedua risiko ini dapat dicegah dengan mematikan fitur DTD saat proses transmisi.
+
+### Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena beberapa alasan, diantaranya :
+- JSON tidak memiliki depedensi terhadap bahasa pemrograman. Hal ini berarti JSON dapat digunakan pada berbagai bahasa pemrograman. Banyak bahasa pemrograman saat ini telah memiliki modul atau kode untuk membaca format JSON sehingga kegiatan membaca atau membuat file JSON dapat dilakukan dengan mudah.
+- JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat. Hal ini tentunya sangat menguntungkan dibandingkan dengan menggunakan format lain. 
+- JSON merupakan salah satu format data yang mendukung transmisi data antar aplikasi web dengan berbagai protocol API, salah satunya RESTful API, untuk menghubungkan client dengan server.
+
+### Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+Hasil akses URL html dalam Postman
+![Hasil akses URL html dalam Postman](postman_html.png)
+Hasil akses URL XML dalam Postman
+![Hasil akses URL XML dalam Postman](postman_xml.png)
+Hasil akses URL JSON dalam Postman
+![Hasil akses URL JSON dalam Postman](postman_json.png)
+Hasil akses URL JSON by ID dalam Postman
+![Hasil akses URL JSON by ID dalam Postman](postman_jsonbyid.png)
+Hasil akses URL XML by ID dalam Postman
+![Hasil akses URL XML by ID dalam Postman](postman_xmlbyid.png)
+
+
+### Melakukan add-commit-push ke GitHub.
