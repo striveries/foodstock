@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+        <style>
+            @font-face {
+                font-family: Franchise;
+                src: url(Franchise.ttf);
+            }
+
+            h1 {
+                color: darkslategray;
+                font-family: Franchise;
+                font-size: 50px;
+            }
+            body {
+                background-color: rgb(250, 239, 223);
+                font-family: 'Source Code Pro';
+                padding: 30px;
+            }
+
+            table, td, th {
+                border: 2px groove rgb(71, 37, 11);
+                border-collapse: collapse;
+                padding: 8px;
+            }
+            .items-div{
+                border: 2px groove;
+                margin-top: 50px;
+                
+            }
+            .item {
+                border: 2px groove;
+                border-top-left-radius: 18px;
+                border-top-right-radius: 18px;
+                border: 2px groove rgb(71, 37, 11);
+
+                background-color: rgb(195, 163, 121); 
+                margin-top: 10px;               
+            }
+            .item-head {
+                display: grid;
+                grid-template-columns: 1fr 50px;
+                background-color: darkslategray;
+                border-radius: 18px;
+            }
+            .amount-div {
+                background-color: rgb(174, 148, 221);
+                border-radius: 18px;
+                
+            }
+
+            .item-head, .desc-div {
+                padding-left: 20px;
+            }
+
+            .add-item-btn {
+                border: 2px groove rgb(71, 37, 11);
+                background-color: rgb(195, 163, 121);
+                font-family: 'Source Code Pro';
+                font-size: 16px;
+                margin-top: 20px;
+                padding: 8px;   
+            }
+        </style>
+
+
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

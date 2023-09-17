@@ -1,13 +1,62 @@
-<h1>Developer Page</h1>
+{% extends 'base.html' %}
 
-<h5>Name: </h5>
-<p>{{ name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
-<h5>Class: </h5>
-<p>{{ class }}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
+{% block content %}
 
-<h1>FoodStock</h1>
+        <h1>Developer Page</h1>
+    
+        <h5>Name: </h5>
+        <p>{{ name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
+        <h5>Class: </h5>
+        <p>{{ class }}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
+    
+        <h1>Food Stock</h1>
+    
+        <p>Kamu menyimpan sejumlah {{count_item}} item pada FoodStock</p>
+    
+        
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date Added</th>
+            </tr>
+    
+            {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+    
+            {% for item in items %}
+                <tr>
+                    <td>{{item.item_name}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.date_added}}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
-<h5>Item Name: </h5>
-<p>{{ item_name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
-<h5>Amount: </h5>
-<p>{{ amount }}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
+        <!-- <div class="items-div">
+            {% for item in items %}
+            <div class='item'>
+                <div class="item-head">
+                    <p>{{item.item_name}}</p>
+                    <div class="amount-div">
+                        <p>{{item.amount}}</p>
+                    </div>
+                </div>
+                <div class='desc-div'>
+                    <p>{{item.description}}</p>
+                    <p>{{item.date_added}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div> -->
+    
+        <a href="{% url 'main:create_item' %}">
+            <button class="add-item-btn">
+                Add New Item
+            </button>
+        </a>
+
+
+
+{% endblock content %}
