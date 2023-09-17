@@ -149,30 +149,241 @@ Perbedaan utama dari ketiganya adalah pola pembagian komponen-komponennya
 
 ## Tugas 3
 
-### Membuat input form untuk menambahkan objek model pada app sebelumnya.
-### Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
-### Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
-
 ### Apa perbedaan antara form POST dan form GET dalam Django?
-- Form POST dalam Django memunculkan data-nya pada bagian `message body` dari HTTP request. Sedangkan, pada form GET, semua data form dituliskan ke dalam URL dan di-append ke action URL sebagai parameter string query.
-- Pada Form GET, parameter data terbatas untuk hanya untuk hal yang bisa dicantumkan pada request line (URL). Sedangkan, pada form METHOD tidak ada masalah ini karena data-nya disimpan pada `message body` dari HTTP request, bukan URL.
-- Form GET memiliki batasan mengenai data yang bisa dikirim. Hanya karakter ASCII yang dapat dikirimkan melalui form GET. Selain itu, panjang string yang dikirimkan pun hanya terbatas sampai dengan 2047 karakter. Sedangkan, pada form POST, tidak ada batasan mengenai data yang bisa dikirimkan.
-- Form POST lebih aman dibandingkan form GET. Pada form GET, data dikirimkan sebagai bagian dari URL sehingga data tersebut dapat terbaca oleh siapapun. 
+- Form POST dalam Django memunculkan data-nya pada bagian `message body` dari HTTP _request_. Sedangkan, pada _form_ GET, semua data _form_ dituliskan ke dalam URL dan di-_append_ ke _action_ URL sebagai parameter string query.
+- Pada _Form_ GET, parameter data terbatas untuk hanya untuk hal yang bisa dicantumkan pada _request line_ (URL). Sedangkan, pada _form_ POST tidak ada masalah ini karena data-nya disimpan pada `message body` dari HTTP request, bukan URL.
+- _Form_ GET memiliki batasan mengenai data yang bisa dikirim. Hanya karakter ASCII yang dapat dikirimkan melalui _form_ GET. Selain itu, panjang string yang dikirimkan pun hanya terbatas sampai dengan 2047 karakter. Sedangkan, pada form POST, tidak ada batasan mengenai data yang bisa dikirimkan.
+- _Form_ POST lebih aman dibandingkan _form_ GET. Pada _form_ GET, data dikirimkan sebagai bagian dari URL sehingga data tersebut dapat terbaca oleh siapapun. 
 
 
 ### Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
 - Dalam konteks fungsinya, HTML berfungsi untuk menampilkan data, sedangkan XML dan JSON berfungsi untuk menyimpan dan mengirimkan data. Oleh karena itu, jelas peran dari HTML dengan dua jenis representasi data lainnya berbeda.
-- Format penulisan antara XML dan JSON berbeda. JSON menggunakan struktur seperti peta dengan pasangan key-value. Sedangkan, XML menyimpan data dalam struktur pohon dengan namespace untuk kategori data yang berbeda. 
+- Format penulisan antara XML dan JSON berbeda. JSON menggunakan struktur seperti peta dengan pasangan **key-value**. Sedangkan, XML menyimpan data dalam **struktur pohon** dengan namespace untuk kategori data yang berbeda. 
 - Tipe data yang bisa disimpan antara XML dan JSON berbeda. JSON mendukung tipe data angka, objek, string, dan array Boolean. Sedangkan, XML mendukung semua tipe data JSON serta beberapa tipe data lainnya seperti Boolean, tanggal, namespace.
-- Dari segi ukuran data, JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat. XML membutuhkan ukuran file yang lebih besar karena struktur penulisannya yang lebih kompleks untuk ditulis maupun dibaca.
-- Dari segi keamanan, JSON lebih aman dibandingkan XML. Hal ini karena struktur XML rentan terhadap terjadinya modifikasi yang tidak terautorisasi yang dikenal sebagai External Entity Injection (XXE). XML juga rentan terhadap terjadinya external document type declaration (DTD) yang tidak terstruktur. Akan tetapi, kedua risiko ini dapat dicegah dengan mematikan fitur DTD saat proses transmisi.
+- Dari segi ukuran data, JSON memiliki ukuran _file_ yang lebih kecil dan transmisi data yang lebih cepat. XML membutuhkan ukuran _file_ yang lebih besar karena struktur penulisannya yang lebih kompleks untuk ditulis maupun dibaca.
+- Dari segi keamanan, JSON lebih aman dibandingkan XML. Hal ini karena struktur XML rentan terhadap terjadinya modifikasi yang tidak terautorisasi yang dikenal sebagai _External Entity Injection_ (XXE). XML juga rentan terhadap terjadinya _External Document Type Declaration_ (DTD) yang tidak terstruktur. Akan tetapi, kedua risiko ini dapat dicegah dengan mematikan fitur DTD saat proses transmisi.
 
 ### Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
 JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena beberapa alasan, diantaranya :
-- JSON tidak memiliki depedensi terhadap bahasa pemrograman. Hal ini berarti JSON dapat digunakan pada berbagai bahasa pemrograman. Banyak bahasa pemrograman saat ini telah memiliki modul atau kode untuk membaca format JSON sehingga kegiatan membaca atau membuat file JSON dapat dilakukan dengan mudah.
-- JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat. Hal ini tentunya sangat menguntungkan dibandingkan dengan menggunakan format lain. 
+- JSON tidak memiliki depedensi terhadap bahasa pemrograman. Hal ini berarti JSON dapat digunakan pada berbagai bahasa pemrograman. Banyak bahasa pemrograman saat ini telah memiliki modul atau kode untuk membaca format JSON sehingga kegiatan membaca atau membuat _file_ JSON dapat dilakukan dengan mudah.
+- JSON memiliki ukuran _file_ yang lebih kecil dan transmisi data yang lebih cepat. Hal ini tentunya sangat menguntungkan dibandingkan dengan menggunakan format lain. 
 - JSON merupakan salah satu format data yang mendukung transmisi data antar aplikasi web dengan berbagai protocol API, salah satunya RESTful API, untuk menghubungkan client dengan server.
 
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+Sebelum mengimplementasikan _checklist_ tersebut, saya terlebih dahulu membuat folder templates pada _root folder_ dan menambahkan file `base.html`. File ini berfungsi sebagai kerangka umum untuk halaman web lain di dalam proyek. Pada file ini, saya menambahkan kode : 
+```
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+            />
+            {% block meta %}
+            {% endblock meta %}
+        </head>
+
+        <body>
+            {% block content %}
+            {% endblock content %}
+        </body>
+    </html>
+```
+Setelah itu, saya menambahkan `'DIRS': [BASE_DIR / 'templates'],` pada `TEMPLATES` di subdirektori foodstock sehingga file `base.html` dapat terdeteksi sebagai file template.
+
+- [x] **Membuat input form untuk menambahkan objek model pada app sebelumnya.**
+    1. Pada direktori main, saya membuat file yang bernama `forms.py` sebagai struktur form untuk menerima data dari item baru yang ditambahkan. File tersebut berisikan kode berikut : 
+        ```
+        from django.forms import ModelForm
+        from main.models import Items
+
+        class ItemForm(ModelForm):
+            class Meta:
+                model = Items
+                fields = ["item_name", "amount", "description"]
+        ```
+        **Penjelasan Kode**
+        - `model = Items` untuk menunjukkan bahwa objek yang akan disimpan dalam form merupakan sebuah objek `Items`
+        - `fields = ["item_name", "amount", "description"]` untuk menunjukan data yang akan diinput oleh user pada form.
+    2. Dalam file `views.py` pada folder `main`, saya menambahkan beberapa _import_ sehingga sekarang _import_-nya berupa : 
+        ```
+        from django.http import HttpResponse
+        from django.core import serializers
+        from django.http import HttpResponseRedirect
+        from main.forms import ItemForm
+        from main.models import Items
+        from django.urls import reverse
+        from django.shortcuts import render
+        ```
+    3. Pada file `views.py`, saya membuat fungsi baru bernama `create_item` yang berfungsi untuk menghasilkan formulir untuk menambahkan data item ketika data di-_submit_ dari _form_.
+        ```
+        def create_item(request):
+        form = ItemForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "create_item.html", context)
+        ```
+        **Penjelasan Kode**
+        - `form = ItemForm(request.POST or None) `  membuat `ItemForm` baru berdasarkan input user pada `request.POST`
+        - `form.is_valid()` memvalidasi isi input dari user pada form.
+        - `form.save()` membuat dan menyimpan data dari form.
+        - `return HttpResponseRedirect(reverse('main:show_main'))` melakukan redirect setelah data form berhasil disimpan.
+    4. Pada file `views.py`, saya mengubah fungsi `show_main` dengan menambahkan objek `items` ke dalam context. Objek ini merepresentasikan kumpulan objek `items` yang telah ditambahkan ke database. Selain itu, saya juga menambahkan `count_item` pada context sebagai penunjang untuk menyelesaikan bagian bonus pada Tugas 3.
+    ```
+    def show_main(request):
+    items = Items.objects.all()
+    context = {
+        'name': 'Calista Sekar',
+        'class': 'PBP C',
+        'items' : items,
+        'count_item' : len(items)
+    }
+
+    return render(request, "main.html", context)
+    ```
+    5. Pada file `urls.py` dalam folder `main`, saya mengimport fungsi `create_item` serta menambahkan path url `create_product` ke dalam `urlpatterns`.
+    ```
+    path('create-item', create_item, name='create_item'),
+    ```
+    6. Pada folder `main/templates`, saya membuat file HTML baru bernama `create_item.html` yang berisikan kode berikut
+    ```
+    {% extends 'base.html' %} 
+
+    {% block content %}
+    <h1>Add New Item</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add Item"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% endblock %}
+    ```
+    7. Pada `main.html`, saya memperbarui kodenya untuk menambahkan data produk ke dalam bentuk tabel serta memunculkan tombol 'Add new Product' yang akan mengarahkan ke halaman pengisian form.
+    ```
+    {% extends 'base.html' %}
+
+        {% block content %}
+
+                <h1>Developer Page</h1>
+            
+                <h5>Name: </h5>
+                <p>{{ name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
+                <h5>Class: </h5>
+                <p>{{ class }}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
+            
+                <h1>Food Stock</h1>
+            
+                <p>Kamu menyimpan sejumlah {{count_item}} item pada FoodStock</p>
+            
+                
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Date Added</th>
+                    </tr>
+            
+                    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+            
+                    {% for item in items %}
+                        <tr>
+                            <td>{{item.item_name}}</td>
+                            <td>{{item.amount}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.date_added}}</td>
+                            <td> 
+                                <a href="{% url 'main:delete_item' item.id %}">Delete</a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="items-div">
+                    {% for item in items %}
+                    <div class='item'>
+                        <div class="item-head">
+                            <p>{{item.item_name}}</p>
+                            <div class="amount-div">
+                                <p>{{item.amount}}</p>
+                            </div>
+                        </div>
+                        <div class='desc-div'>
+                            <p>{{item.description}}</p>
+                            <p>{{item.date_added}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            
+                <br />
+            
+                <a href="{% url 'main:create_item' %}">
+                    <button>
+                        Add New Item
+                    </button>
+                </a>
+
+
+
+        {% endblock content %}
+    ```
+
+
+- [x] **Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.**
+    Pada berkas `views.py` dalam folder `main`, saya menambahkan 4 fungsi tambahan untuk mendukung format tersebut
+    ```
+    def show_xml(request):
+        data = Items.objects.all()
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json(request):
+        data = Items.objects.all()
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+    def show_xml_by_id(request, id):
+        data = Items.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json_by_id(request, id):
+        data = Items.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    ```
+
+- [x] **Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.** 
+    1. Pada file `urls.py` dalam folder `main` saya mengimpor fungsi yang telah dibuat pada poin 2
+    ```
+    from main.views import show_main, create_item, show_html, show_xml, show_json, show_xml_by_id, show_json_by_id, delete_item 
+    ```
+    2. Dalam file yang sama, pada `urlpatterns` saya menambahkan fungsi yang telah diimpor serta menuliskan endpoint untuk pengaksesan fungsi tersebut
+    ```
+    urlpatterns = [
+        path('', show_main, name='show_main'),
+        path('create-item', create_item, name='create_item'),
+        path('html/', show_html, name='show_html'), 
+        path('xml/', show_xml, name='show_xml'), 
+        path('json/', show_json, name='show_json'),
+        path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+        path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),  
+        path('delete/<int:item_id>/', delete_item, name='delete_item'),  
+    ]
+    ```
 ### Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
 Hasil akses URL html dalam Postman
 ![Hasil akses URL html dalam Postman](postman_html.png)
@@ -184,6 +395,3 @@ Hasil akses URL JSON by ID dalam Postman
 ![Hasil akses URL JSON by ID dalam Postman](postman_jsonbyid.png)
 Hasil akses URL XML by ID dalam Postman
 ![Hasil akses URL XML by ID dalam Postman](postman_xmlbyid.png)
-
-
-### Melakukan add-commit-push ke GitHub.

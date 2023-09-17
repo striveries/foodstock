@@ -1,8 +1,0 @@
-<!-- delete_item.html -->
-
-<h2>Confirm Deletion</h2>
-<p>Are you sure you want to delete "{{ item.name }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <input type="submit" value="Confirm Delete">
-</form>

@@ -30,15 +30,11 @@
                     <td>{{item.amount}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.date_added}}</td>
-                    <td> 
-                        <a href="{% url 'main:delete_item' item.id %}">Delete</a>
-                    </td>
-                    
                 </tr>
             {% endfor %}
         </table>
 
-        <div class="items-div">
+        <!-- <div class="items-div">
             {% for item in items %}
             <div class='item'>
                 <div class="item-head">
@@ -53,12 +49,10 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
-    
-        <br />
+        </div> -->
     
         <a href="{% url 'main:create_item' %}">
-            <button>
+            <button class="add-item-btn">
                 Add New Item
             </button>
         </a>

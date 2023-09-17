@@ -5,7 +5,6 @@ from main.forms import ItemForm
 from main.models import Items
 from django.urls import reverse
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -29,34 +28,6 @@ def create_item(request):
 
     context = {'form': form}
     return render(request, "create_item.html", context)
-
-def delete_item(request, item_id):
-    # Get the item object to delete
-    item = get_object_or_404(Items, pk=item_id)
-
-    if request.method == 'POST':
-        # Delete the item if the request method is POST
-        item.delete()
-        return HttpResponseRedirect(reverse('main:show_main'))
-
-    # Render a confirmation page with a form to confirm deletion
-    context = {'item': item}
-    return render(request, 'delete_item.html', context)
-
-# def show_html(request):
-#     items = Items.objects.all()
-#     context = {'items': items}
-#     return render(request, "items.html", context)
-
-def show_html(request):
-    data = Items.objects.all()
-    html_data = serializers.serialize("html", data)
-
-    # Escape HTML tags and wrap in <pre> for formatting
-    escaped_html = '<pre>' + html_data.replace('<', '&lt;').replace('>', '&gt;') + '</pre>'
-    
-    return HttpResponse(escaped_html, content_type="text/html")
-
 
 def show_xml(request):
     data = Items.objects.all()
