@@ -349,18 +349,33 @@ Setelah itu, saya menambahkan `'DIRS': [BASE_DIR / 'templates'],` pada `TEMPLATE
 - [x] **Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.**
     Pada berkas `views.py` dalam folder `main`, saya menambahkan 4 fungsi tambahan untuk mendukung format tersebut
     ```
+    #HTML
+    def create_item(request):
+    form = ItemForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_item.html", context)
+
+    #XML
     def show_xml(request):
         data = Items.objects.all()
         return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
+    
+    #JSON
     def show_json(request):
         data = Items.objects.all()
         return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+    #XML by ID
     def show_xml_by_id(request, id):
         data = Items.objects.filter(pk=id)
         return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+    #JSON by ID
     def show_json_by_id(request, id):
         data = Items.objects.filter(pk=id)
         return HttpResponse(serializers.serialize("json", data), content_type="application/json")
