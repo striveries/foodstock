@@ -410,3 +410,287 @@ Hasil akses URL JSON by ID dalam Postman
 ![Hasil akses URL JSON by ID dalam Postman](postman_jsonbyid.png)
 Hasil akses URL XML by ID dalam Postman
 ![Hasil akses URL XML by ID dalam Postman](postman_xmlbyid.png)
+
+
+# Tugas 4
+
+## Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+Django UserCreationForm merupakan impor formulir bawaan dari library Forms pada Django yang berfungsi untuk pembuatan formulir pendaftaran pengguna. Dengan UserCreationForm, data pengguna dapat disimpan ke dalam database dengan lebih mudah.
+
+**Kelebihan**
+- Mempermudah pendaftaran pengguna dalam aplikasi web
+- Mendukung verifikasi input yang pengguna masukkan sesuai ketentuan web
+- Memiliki sistem keamanan bawaan untuk mencegah serangan seperti _cross-site scripting_ (XSS).
+- Menyediakan API yang simpel namun dapat dengan cepat membuat formulir pengguna
+
+**Kekurangan**
+- Limitasi dalam desain dan tampilan formulir karena tidak dapat sepenuhnya disesuaikan dengan kebutuhan aplikasi.
+- Tidak dapat digunakan untuk menciptakan formulir yang lebih rumit atau khusus. Jika aplikasi membutuhkan formulir yang lebih kompleks, maka _developer_ perlu membuat formulir khusus.
+
+
+## Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+Sistem autentikasi pada Django menangani kegiatan autentikasi dan otorisasi. Pada Django, autentikasi adalah proses memverifikasi identitas pengguna, apakah pengguna tersebut valid atau sesuai dengan _credentials_ yang mereka claim. Sedangkan, otorisasi menentukan apa saja kegiatan/task yang bisa dilakukan oleh seorang _authenticated user_ (pengguna yang telah terautentikasi) berdasarkan _credentials_-nya.
+
+Kedua konsep ini penting untuk memastikan bahwa hanya pengguna yang terautentikasi dan terotorisasi yang dapat mengakses bagian-bagian penting dalam aplikasi web yang kita bangun.
+
+
+## Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+_Cookies_ adalah file kecil yang disimpan pada sisi klien (_browser_) dan berisi informasi yang dapat digunakan oleh aplikasi web. Django menggunakan _cookies_ untuk mengelola data sesi pengguna. Penggunaan _cookies_ dalam pengelolaan data sesi pengguna pada Django diantaranya : 
+- Data sesi pengguna disimpan pada sisi server
+- _Session ID _dikirimkan ke browser pengguna melalui _cookie_.
+- Setiap kali pengguna melakukan permintaan ke server, cookie _session ID_ dikirimkan bersama permintaan.
+- _Session ID_ digunakan untuk mengambil data sesi pengguna yang sesuai dari server.
+	
+## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+Dalam pengembangan web, penggunaan _cookies_ tetap memiliki risiko potensial yang patut untuk diwaspadai, diantaranya : 
+- Ancaman terhadap Privasi: _Cookies_ memiliki potensi untuk mengumpulkan data pribadi pengguna, seperti alamat email, nama pengguna, dan preferensi. Jika _cookies_ jatuh ke tangan peretas, informasi pribadi tersebut bisa dimanfaatkan untuk tujuan yang tidak diinginkan.
+- Ancaman terhadap Keamanan: _Cookies_ dapat dimanfaatkan oleh peretas untuk mencuri data pengguna atau meretas situs web di mana _cookies_ tersebut digunakan. Selain itu, _cookies_ juga dapat digunakan sebagai sarana penyebaran _malware_ atau virus.
+
+## Step-by-Step
+
+
+###  Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+1. Pada `views.py`, saya menambahkan import baru untuk mendukung pengimplementasian registrasi, login, dan logout
+```
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages  
+
+```
+2. Pada `views.py`, saya juga menambahkan 3 fungsi baru untuk menghasilkan formulir registrasi, login, dan logout
+```
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+```
+3. Pada folder `templates` dalam subdirektori `main`, saya membuat file HTML baru bernama `register.html` yang berisi template untuk tampilan laman registrasi dengan kode : 
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "login">
+    
+    <h1>Register</h1>  
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                </tr>  
+            </table>  
+        </form>
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}
+```
+3. Pada folder `templates` dalam subdirektori `main`, saya membuat file HTML baru bernama `login.html` yang berisi template untuk tampilan laman login dengan kode : 
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+        </table>
+        <input class="btn login_btn" type="submit" value="Login">
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+
+{% endblock content %}
+```
+4. Pada file `main.html`, saya menambahkan potongan kode baru untuk menambahkan button logout : 
+```
+<a href="{% url 'main:logout' %}">
+    <button>
+        Logout
+    </button>
+</a>
+```
+5. Pada `urls.py` dalam subdirektori `main`, saya mengimport ketiga fungsi yang telah saya buat sebelumya
+```
+from main.views import register, login_user, logout_user
+```
+6. Pada file yang sama, saya juga menambahkan ketiga path url ke dalam `urlpatterns`
+```
+    path('register/', register, name='register'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
+```
+7. Agar memastikan bahwa user yang dapat mengakses halaman main hanya user yang telah login, maka saya menambahkan `login_required` untuk merestriksi akses halaman main
+```
+from django.contrib.auth.decorators import login_required // kode ini ditambahkan
+
+@login_required(login_url='/login') // kode ini ditambahkan
+def show_main(request):
+    items = Items.objects.filter(user=request.user)
+    context = {
+        'name': request.user.username,
+        'class': 'PBP C',
+        'items' : items,
+        'count_item' : len(items),
+        'last_login': request.COOKIES['last_login'],
+    }
+
+    return render(request, "main.html", context)
+```
+
+### Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+Sudah dibuat
+
+
+### Menghubungkan model Item dengan User.
+1. Pada `models.py` dalam subdirektori `main` saya menambahkan impor model baru serta menambahkan `ForeignKey` untuk memberikan asosiasi one-to-one antara satu produk dengan satu user. Kode saya modifikasi menjadi : 
+```
+...
+from django.db import models
+from django.contrib.auth.models import User
+
+class Items(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+...
+```
+2. Pada `views.py` dalam subdirektori `main` saya memodifikasi kodenya sehingga objek yang telah dibuat dari form bisa dimodifikasi terlebih dahulu sebelum disimpan ke database. Selain itu, `user` juga diassign dengan value `request.user` yang sedang terotorisasi untuk memberitahukan  bahwa user yang dimaksud adalah user yang mengirimkan request tersebut.
+```
+def create_item(request):
+    form = ItemForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        item = form.save(commit=False)
+        item.user = request.user
+        item.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_item.html", context)
+```
+3. Pada fungsi `show_main`, saya memodifikasinya sehingga bisa menampilkan `Item` yang telah dibuat oleh user tersebut dengan menggunakan `Item.objects.filter(user=request.user)`
+```
+def show_main(request):
+    items = Items.objects.filter(user=request.user)
+    context = {
+        'name': request.user.username,
+    ...
+```
+4. Karena saya melakukan modifikasi pada model, maka saya melakukan migrasi model dengan melakukan `python manage.py makemigrations` dan `python manage.py migrate`
+
+### Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+1. Pada `views.py` dalam subdirektori `main`, saya menambahkan beberapa impor baru serta mengubah fungsi login_user sehigga menjadi : 
+```
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+...
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None: // tambahkan kode ini
+            login(request, user) 
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+```
+Perubahan ini bertujuan untuk membuat cookie last_login serta mengirimkannya bersamaan ke dalam response
+
+2. Pada fungsi `show_main`, saya merubah `context` sehingga mencantumkan `last_login`  untuk menambahkan informasi terkait cookie `last_login` agar bisa ditampilkan pada laman web
+```
+context = {
+        'name': request.user.username,
+        'class': 'PBP C',
+        'items' : items,
+        'count_item' : len(items),
+        'last_login': request.COOKIES['last_login'],
+    }
+```
+3. Kemudian, saya mengubah `logout_user` sehingga ketika user login, cookie `last_login` juga ikut dihapuskan
+```
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login') // tambahkan kode ini
+    return response
+```
+4. Terakhir, saya menambahkan kode html pada `main.html` untuk menampilkan data last login user tersebut
+```
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+```

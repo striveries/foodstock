@@ -1,0 +1,10 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<h2>Confirm Addition</h2>
+<p>Are you sure you want to add "{{ item.item_name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Confirm Add Item">
+</form>
+{% endblock %}
