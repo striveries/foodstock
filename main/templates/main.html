@@ -2,7 +2,7 @@
 
 {% block content %}
 
-        <h1>Developer Page</h1>
+        <h1>User Page</h1>
     
         <h5>Name: </h5>
         <p>{{ name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
@@ -32,22 +32,23 @@
                     <td>{{item.description}}</td>
                     <td>{{item.date_added}}</td>
                     <td>
-
-                        <a href="{% url 'main:add_item' item.id %}">
-                            <button class="add-item-btn">
-                                Add Item
-                            </button>
-                        </a>
-                        <a href="{% url 'main:reduce_item' item.id %}">
-                            <button class="add-item-btn">
-                                Remove Item
-                            </button>
-                        </a>
-                        <a href="{% url 'main:delete_item' item.id %}">
-                            <button class="add-item-btn">
-                                Delete Item
-                            </button>
-                        </a> 
+                        <div class="item-buttons">
+                            <a href="{% url 'main:add_item' item.id %}">
+                                <button>
+                                    Add Item
+                                </button>
+                            </a>
+                            <a href="{% url 'main:reduce_item' item.id %}">
+                                <button>
+                                    Remove Item
+                                </button>
+                            </a>
+                            <a href="{% url 'main:delete_item' item.id %}">
+                                <button>
+                                    Delete Item
+                                </button>
+                            </a> 
+                        </div>
                     </td>
                     
                 </tr>
