@@ -7,5 +7,7 @@
     {% csrf_token %}
     <input type="submit" value="Confirm Reduce">
 </form>
-
+<form method="get" action="{% url 'main:show_main' %}">
+    <button type="submit">Kembali</button>
+</form>
 {% endblock %}
