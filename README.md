@@ -753,4 +753,4 @@ Pada tugas ini, saya menggunakan CSS untuk mendesain template HTML yang telah sa
 ### Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
 Pada ketiga halaman ini, saya mengubah warna serta font yang digunakan. Tema warna yang saya gunakan ada 3, yaitu `darkslategrey` dan `rgb(250, 239, 223`. Untuk font yang digunakan, saya menggunakan 2 font utama yaitu `Franchise` dan `Source Code Pro`
 ### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
-Halaman daftar inventori saya warnai menggunakan warna coklat yang lebih tua seperti `rgb(71, 37, 11)`. Untuk pendekatannya, saya juga menerapkan bootstrap untuk mengostumisasi tampilan inventorinya.
+Halaman daftar inventori saya warnai menggunakan warna coklat yang lebih tua seperti `rgb(71, 37, 11)`. Untuk pendekatannya, saya juga menerapkan bootstrap untuk mengostumisasi navbar di bagian atas. Selain itu, saya jgua menerapkan warna yang berbeda untuk item terakhir dalam inventori.
