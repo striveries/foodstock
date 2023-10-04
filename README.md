@@ -694,3 +694,63 @@ def logout_user(request):
 ```
 <h5>Sesi terakhir login: {{ last_login }}</h5>
 ```
+
+
+# Tugas 5
+
+## Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+Terdapat beberapa jenis element selector, sebagai berikut:
+
+### Universal Selector
+Menggunakan `*`
+Selector ini berfungsi untuk memilih semua elemen dalam dokumen HTML. Selector ini umumnya digunakan untuk memberikan style yang digunakan secara menyeluruh untuk satu dokumen HTML.
+### Type Selector
+Type selector dapat memilih sebuah elemen HTML berdasarkan jenis tag tertentu. Sebagai contoh, jika ingin memilih semua elemen  `<p>` maka pada file css, dapat dituliskan tanpa awalan `#` ataupun `.`
+```
+p {
+    //styles
+}
+```
+Selector ini umumnya digunakan ketika style yang digunakan ingin diterapkan pada semua elemen dengan jenis tag yang sama.
+### CLass Selector
+Menggunakan awalan `.`
+Class selector dapat memilih semua elemen dnegan atribut class yang sama. Selector ini umumnya digunakan untuk memberikan style pada beberapa elemen dengan class yang sama. Scope dari class biasanya lebih tinggi daripada sebuah ID, namun tidak seluas type. 
+### ID Selector
+Menggunakan awalan `#`
+ID selector dapat memilih elemen dengan atribut id, yang mana harus berbeda dari elemen lain dalam satu halaman yang sama. Biasanya, ID selector giunakan untuk menerapkan style pada satu elemen tertentu saja.
+### Pseudo Selector
+Menggunakan awalan `::`
+Pseudo selector merupakana atribut tambahan pada selector class atau selector element. Biasanya, pseudo selector digunakan untuk menambahkan style untuk kondisi-kondisi tertentum seperti `hover` atau `active`.
+
+
+## Jelaskan HTML5 Tag yang kamu ketahui.
+Pada HTML5, terdapat beberapa tag baru seperti `<nav>` `<header>` `<footer>`  `<article>`  `<section>` 
+
+- `<nav>` : untuk mengelompokkan elemen-elemen yang berisi navigasi atau tautan ke bagian-bagian lain dalam situs web atau ke halaman-halaman terkait.
+Contoh penggunaan: Menyediakan menu utama situs, menu navigasi, atau tautan ke halaman-halaman terkait.
+- `<header>`: untuk mengidentifikasi bagian atas atau kepala dari sebuah elemen, seperti halaman web atau artikel.
+Contoh penggunaan: Biasanya berisi judul, logo, dan elemen-elemen lain yang merupakan bagian penting dari kepala situs atau artikel.
+- `<footer>`: untuk mengidentifikasi bagian bawah dari sebuah elemen, seperti halaman web atau artikel.
+Contoh penggunaan: Digunakan untuk menyertakan informasi tambahan seperti informasi kontak, tautan ke halaman terkait, atau hak cipta.
+- `<article>`: untuk menandai konten independen yang dapat berdiri sendiri dan memiliki makna yang signifikan. Artikel dapat digunakan dalam berita, blog, posting, dan konten lainnya.
+Contoh penggunaan: untuk mengelompokkan satu artikel dalam situs berita, satu posting di blog, atau satu berita dalam halaman berita.
+- `<section>`: untuk menandai bagian-bagian dari konten yang terkait dalam dokumen, membantu dalam pengelompokkan dan mengatur konten yang lebih besar.
+Contoh penggunaan: Memecah halaman web menjadi beberapa bagian, seperti pengenalan, fitur, dan kontak.
+
+## Jelaskan perbedaan antara margin dan padding.
+Margin memberikan space tambahan ke arah luar elemen. Margin dapat digunakan untuk memberikan jarak antara elemen dengan elemen lain di sekitarnya atau dengan batas luar kontainer yang mengelilinginya. Sedangkan, padding memberikan space tambahan ke dalam objek. Padding digunakan untuk memberikan jarak antara konten elemen dan batasnya, sehingga memengaruhi bagaimana konten tersebut muncul dalam elemen tersebut. Keduanya memiliki properti yang kurang lebih sama, seperti top, right, bottom, dan left.
+
+## Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Berikut merupakan beberapa perbedaan antara kedua frameworks tersebut : 
+- Bootstrap memiliki ukuran file yang cenderung lebih besar karena menyediakan banyak fitur dan komponen. Sedangkan, Tailwind memiliki file stylesheet yang jumlahnya lebih seidkit daripada bootstrap.
+- Bootstrap lebih berfokus pada tingkat responsif dan mobilitas web app. Sedangkan, Tailwind lebih mengutamakan utilitas dari style yang diterapkan.
+- Bootstrap memiliki kumpulan komponen yang siap digunakan. Sedangkan, Tailwind tidak memiliki template default, sehingga perlu di-build terlebih dahulu.
+- Bootstrap ebih mudah digunakan untuk pemula karena memiliki dokumentasi yang lengkap. 
+- Bootstrap cocok untuk pengembangan web yang membutuhkan banyak fitur dan komponen, sedangkan Tailwind cocok untuk pengembangan web yang membutuhkan fleksibilitas dan kontrol yang lebih besar dalam styling elemen UI.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Pada tugas ini, saya menggunakan CSS untuk mendesain template HTML yang telah saya buat di Tugas 4.
+### Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+Pada ketiga halaman ini, saya mengubah warna serta font yang digunakan. Tema warna yang saya gunakan ada 3, yaitu `darkslategrey` dan `rgb(250, 239, 223`. Untuk font yang digunakan, saya menggunakan 2 font utama yaitu `Franchise` dan `Source Code Pro`
+### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
+Halaman daftar inventori saya warnai menggunakan warna coklat yang lebih tua seperti `rgb(71, 37, 11)`. Untuk pendekatannya, saya juga menerapkan bootstrap untuk mengostumisasi tampilan inventorinya.

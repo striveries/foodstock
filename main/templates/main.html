@@ -12,6 +12,19 @@
         <h1>Food Stock</h1>
     
         <p>Kamu menyimpan sejumlah {{count_item}} item pada FoodStock</p>
+
+        <!-- {% for item in items %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{item.item_name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{item.amount}} items</h6>
+              <p class="card-text">{{item.description}}</p>
+              <h6 class="card-subtitle mb-2 text-muted">{{item.amount}} items</h6>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        {% endfor %} -->
     
         
         <table>
@@ -26,7 +39,9 @@
             {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
     
             {% for item in items %}
-                <tr>
+                <tr class="last-item"></tr>
+            </tr>
+            <tr class="{% if forloop.last %}last-row{% endif %}">
                     <td>{{item.item_name}}</td>
                     <td>{{item.amount}}</td>
                     <td>{{item.description}}</td>
@@ -43,15 +58,15 @@
                                     Remove Item
                                 </button>
                             </a>
-                            <a href="{% url 'main:delete_item' item.id %}">
+                            <a href="{% url 'main:delete_item' item.pk %}">
                                 <button>
                                     Delete Item
                                 </button>
                             </a> 
                         </div>
                     </td>
-                    
                 </tr>
+  
             {% endfor %}
         </table>
 
