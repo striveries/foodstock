@@ -14,7 +14,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
-    path('add_item/<int:item_id>/', add_item, name='add_item'),
-    path('reduce_item/<int:item_id>/', reduce_item, name='reduce_item'),
-    path('delete_item/<int:item_id>/', delete_item, name='delete_item'),
+    path('add_item/<int:id>/', add_item, name='add_item'),
+    path('reduce_item/<int:id>/', reduce_item, name='reduce_item'),
+    path('delete_item/<int:id>/', delete_item, name='delete_item'),
     ]

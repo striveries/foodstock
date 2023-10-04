@@ -96,41 +96,28 @@ def logout_user(request):
     return response
 
 
-def add_item(request, item_id):
-    item = get_object_or_404(Items, pk=item_id)
-    if request.method == 'POST':
-        item.amount += 1
-        item.save()
-        return HttpResponseRedirect(reverse('main:show_main'))
+def add_item(request, id):
+    item = Items.objects.get(pk = id)
+    if item.amount > 0:
+            item.amount += 1
+            item.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
 
-    # Render a confirmation page with a form to confirm deletion
-    context = {'item': item}
-    return render(request, 'add_item.html', context)
-
-def reduce_item(request, item_id):
-    item = get_object_or_404(Items, pk=item_id)
-    if request.method == 'POST':
-        if item.amount > 0:
+def reduce_item(request, id):
+    item = Items.objects.get(pk = id)
+    if item.amount > 0:
             item.amount -= 1
             item.save()
             return HttpResponseRedirect(reverse('main:show_main'))
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
 
-    # Render a confirmation page with a form to confirm deletion
-    context = {'item': item}
-    return render(request, 'reduce_item.html', context)
-
-def delete_item(request, item_id):
-    # item = get_object_or_404(Items, pk=item_id)
-    # item.delete()
-    # return HttpResponseRedirect(reverse('main:show_main'))
-
-    # Get the item object to delete
-    item = get_object_or_404(Items, pk=item_id)
-
-    if request.method == 'POST':
-        # Delete the item if the request method is POST
-        item.delete()
-        return HttpResponseRedirect(reverse('main:show_main'))
-    # Render a confirmation page with a form to confirm deletion
-    context = {'item': item}
-    return render(request, 'delete_item.html', context)
+def delete_item(request, id):
+    # Get data berdasarkan ID
+    item = Items.objects.get(pk = id)
+    # Hapus data
+    item.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
