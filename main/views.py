@@ -34,6 +34,15 @@ def show_main(request):
 
     return render(request, "main.html", context)
 
+def user_page(request):
+    items = Items.objects.filter(user=request.user)
+    context = {
+        'name': request.user.username,
+        'class': 'PBP C',
+    }
+
+    return render(request, "user_page.html", context)
+
 def create_item(request):
     form = ItemForm(request.POST or None)
 
@@ -45,6 +54,7 @@ def create_item(request):
 
     context = {'form': form}
     return render(request, "create_item.html", context)
+
 
 def show_xml(request):
     data = Items.objects.all()
@@ -121,3 +131,18 @@ def delete_item(request, id):
     item.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+def edit_item(request, id):
+    # Get product berdasarkan ID
+    item = Items.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+    form = ItemForm(request.POST or None, instance=item)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_item.html", context)

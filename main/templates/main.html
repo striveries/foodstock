@@ -2,14 +2,11 @@
 
 {% block content %}
 
-        <h1>User Page</h1>
     
         <h5>Name: </h5>
         <p>{{ name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
         <h5>Class: </h5>
         <p>{{ class }}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
-    
-        <h1>Food Stock</h1>
     
         <p>Kamu menyimpan sejumlah {{count_item}} item pada FoodStock</p>
 
@@ -63,6 +60,11 @@
                                     Delete Item
                                 </button>
                             </a> 
+                            <a href="{% url 'main:edit_item' item.pk %}">
+                                <button>
+                                    Edit
+                                </button>
+                            </a>
                         </div>
                     </td>
                 </tr>
