@@ -13,3 +13,8 @@ class User(models.Model):
     age = models.IntegerField()
     hobby = models.TextField()
     
+
+
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
+    department = models.CharField(max_length=255)

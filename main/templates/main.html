@@ -2,75 +2,85 @@
 
 {% block content %}
 
-    
-        <h5>Name: </h5>
-        <p>{{ name }}</p> <!-- Ubahlah sesuai dengan nama kamu -->
-        <h5>Class: </h5>
-        <p>{{ class }}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
-    
-        <p>Kamu menyimpan sejumlah {{count_item}} item pada FoodStock</p>
+<div class="container-fluid landing-page">
+    <!-- <div class="bg-image" style="background-image: url('the-market-3147758.jpg')"> -->
 
-        <!-- {% for item in items %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{item.item_name}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{item.amount}} items</h6>
-              <p class="card-text">{{item.description}}</p>
-              <h6 class="card-subtitle mb-2 text-muted">{{item.amount}} items</h6>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-        {% endfor %} -->
+    <p class="mx-auto text-center" style="max-width: 70%;">
+        Welcome to FoodStock - Your Stock Management Partner. 
+        FoodStock is an innovative platform designed to help you manage your food ingredient inventory more efficiently. 
+        Monitor your food stock, identify restocking needs, and keep records of ingredient prices all in one place. 
+        Optimize your FnB business with FoodStock!
+    </p>
+
+</div>
+</div>
+<div class="shadow-lg mb-5 bg-body rounded">
+    <nav class="navbar navbar-trans sticky-nav" role="navigation" style="z-index: 1051;">
+        <div class="container">
+            <ul class="nav navbar-expand-lg navbar-left">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'main:user_page' %}">User</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <a class="navbar-brand mx-auto" href="#">FoodStock</a>
+            </ul>
+            <ul class="nav navbar-expand-lg navbar-right text-center">
+              <span class="navbar-text ml-2">
+                  Welcome, {{ user.username }}!
+                  <a href="{% url 'main:logout' %}">
+                    <button>
+                        Logout
+                    </button>
+                </a>
+              </span>
+            </ul>
+      </div>
+  </nav>
+
+  </div>
+<div class="container custom-padding text-center" style="z-index: 1051;">
+            <h5>Sesi terakhir login: {{ last_login }}</h5>
+            <p>Total tersimpan {{count_item}} item pada FoodStock</p>
     
+            <!-- {% for item in items %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.item_name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{item.amount}} items</h6>
+                  <p class="card-text">{{item.description}}</p>
+                  <h6 class="card-subtitle mb-2 text-muted">{{item.amount}} items</h6>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div>
+            {% endfor %} -->
         
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Date Added</th>
-                <th>Options</th>
-            </tr>
+        
+                    <!-- <tr class="last-item"></tr>
+                </tr> -->
+                <!-- <tr class="{% if forloop.last %}last-row{% endif %}"> -->
+                <!-- <table id="product_table"></table> -->
     
-            {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+                <button type="button" class="btn bg-primary add-ajax mx-auto mb-5 p-3 shadow" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
     
-            {% for item in items %}
-                <tr class="last-item"></tr>
-            </tr>
-            <tr class="{% if forloop.last %}last-row{% endif %}">
-                    <td>{{item.item_name}}</td>
-                    <td>{{item.amount}}</td>
-                    <td>{{item.description}}</td>
-                    <td>{{item.date_added}}</td>
-                    <td>
-                        <div class="item-buttons">
-                            <a href="{% url 'main:add_item' item.id %}">
-                                <button>
-                                    Add Item
-                                </button>
-                            </a>
-                            <a href="{% url 'main:reduce_item' item.id %}">
-                                <button>
-                                    Remove Item
-                                </button>
-                            </a>
-                            <a href="{% url 'main:delete_item' item.pk %}">
-                                <button>
-                                    Delete Item
-                                </button>
-                            </a> 
-                            <a href="{% url 'main:edit_item' item.pk %}">
-                                <button>
-                                    Edit
-                                </button>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-  
-            {% endfor %}
-        </table>
+                <div id="product_card"></div>
+        </div>
+
 
         <!-- <div class="items-div">
             {% for item in items %}
@@ -89,19 +99,158 @@
             {% endfor %}
         </div> -->
     
-        <a href="{% url 'main:create_item' %}">
+        <!-- <a href="{% url 'main:create_item' %}">
             <button class="add-item-btn">
                 Add New Item
             </button>
-        </a>
-        <a href="{% url 'main:logout' %}">
-            <button>
-                Logout
-            </button>
-        </a>
-        
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        </a> -->
+        <div class="container mt-sm-5 mt-lg-4">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="z-index: 2000;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form" onsubmit="return false;">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="name" class="col-form-label">Name</label>
+                                    <input type="text" class="form-control" id="item_name" name="item_name"></input>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="col-form-label">Amount</label>
+                                    <input type="number" class="form-control" id="amount" name="amount"></input>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="col-form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn bg-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
+
+        <script>
+            async function getProducts() {
+                return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+            }
+
+            async function refreshProducts() {
+                document.getElementById("product_table").innerHTML = ""
+                const products = await getProducts()
+                let htmlString = `<tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                    <th>Options</th>
+                </tr>`
+                products.forEach((item) => {
+                    htmlString += `\n<tr>
+                    <td>${item.fields.item_name}</td>
+                    <td>${item.fields.amount}</td>
+                    <td>${item.fields.description}</td>
+                    <td>${item.fields.date_added}</td>
+                    <td>
+                        <div class="item-buttons">
+                            <a href='edit-product/${item.pk}'>
+                            <button onclick="editItem(${item.pk})">Edit</button>
+                            </a>
+                            <a href='delete-product/${item.pk}'>
+                                <button onclick="deleteItem(${item.pk})">Delete</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>` 
+                })
+                
+                document.getElementById("product_table").innerHTML = htmlString
+            }
+
+            async function refreshProductsCards() {
+                document.getElementById("product_card").innerHTML = ""
+                const products = await getProducts()
+                let htmlString = ` <div class="row row-cols-1 row-cols-md-4 mb-3 text-center">`
+                products.forEach((item) => {
+                    htmlString += `
+                    <div class="col mb-3 ml-7">
+                        <div class="shadow mb-3 bg-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">${item.fields.item_name}</h5>
+                                <p class="card-text">${item.fields.description}</p>
+                                <p class="btn bg-primary">Sisa Stok : ${item.fields.amount}</p>
+                                <div class="item-buttons">
+                                    <a href='edit-item/${item.pk}'>
+                                        <button class="bg-custom-3" onclick="editItem(${item.pk})">Edit</button>
+                                    </a>
+                                    <a href='delete_item/${item.pk}'>
+                                        <button class="bg-custom-3" onclick="deleteItem(${item.pk})">Delete</button>
+                                    </a>
+                                </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Date Added ${item.fields.date_added}</small>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                ` 
+                })
+                htmlString += `</div>`
+                
+                document.getElementById("product_card").innerHTML = htmlString
+            }
+
+            
+            function addItem() {
+            fetch("{% url 'main:add_item_ajax' %}", {
+                    method: "POST",
+                    body: new FormData(document.querySelector('#form'))
+                }).then(refreshProductsCards).then(location.reload())
+
+                document.getElementById("form").reset()
+                return false
+            }
+
+            document.getElementById("button_add").onclick = addItem
+
+
+            function editItem(itemId) {
+                fetch(`{% url 'main:edit_item' 0 %}${itemId}/`, {
+                    method: "POST",
+                    body: new FormData(document.querySelector('#form'))
+                }).then(refreshProductsCards)
+
+                document.getElementById("form").reset()
+                return false
+            }
+
+            function deleteProduct(itemId) {
+                fetch(`{% url 'main:delete_item' 0 %}`.replace("0", itemId), {
+                    method: "POST",
+                    body: new FormData(document.querySelector('#form'))
+                }).then(refreshProductsCards)
+
+                document.getElementById("form").reset()
+                return false
+            }
+            refreshProductsCards()
+
+            refreshProducts()
+        </script>
+    </div>
+</div>
 
 {% endblock content %}

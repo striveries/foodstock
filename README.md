@@ -1,10 +1,19 @@
 # FoodStock
 FoodStock merupakan suatu aplikasi berbasis _website_ yang berfungsi sebagai platform untuk membantu pengelolaan inventori stok bahan makanan suatu bisnis FnB. Melalui aplikasi ini, pengguna dapat mengetahui stok bahan makanan dasar terkini, bahan makanan yang sudah perlu untuk dilakukan _restock_, hingga melakukan pendataan harga bahan makanan tersebut.
 
+Theme Color
+#2f4f4f darkslategrey
+#c3a379 creamy light brown
+#4f372f dark brown
+#8379c3 ungu
+
+### Link Web Aplikasi
+🔗 [Access our FoodStock](http://calista-sekar-tugas.pbp.cs.ui.ac.id)
+
 ### Penyusun Proyek
 Nama : Calista Sekar    
 NPM : 2206082064    
-Kelas : C   
+Kelas : C  
 
 ## Langkah-Langkah Development FoodStock
 ### Membuat sebuah proyek Django baru.
@@ -754,3 +763,84 @@ Pada tugas ini, saya menggunakan CSS untuk mendesain template HTML yang telah sa
 Pada ketiga halaman ini, saya mengubah warna serta font yang digunakan. Tema warna yang saya gunakan ada 3, yaitu `darkslategrey` dan `rgb(250, 239, 223`. Untuk font yang digunakan, saya menggunakan 2 font utama yaitu `Franchise` dan `Source Code Pro`
 ### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
 Halaman daftar inventori saya warnai menggunakan warna coklat yang lebih tua seperti `rgb(71, 37, 11)`. Untuk pendekatannya, saya juga menerapkan bootstrap untuk mengostumisasi navbar di bagian atas. Selain itu, saya jgua menerapkan warna yang berbeda untuk item terakhir dalam inventori.
+
+# TUGAS 6
+
+### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+Asynchronous programming dan synchronous programming adalah dua pendekatan yang berbeda dalam mengelola waktu eksekusi dalam pengembangan perangkat lunak. Synchronous programming, juga dikenal sebagai pemrograman sekuensial, menjalankan operasi secara berurutan. Saat operasi tertentu sedang berjalan, eksekusi kode berikutnya akan terhenti atau diblokir hingga operasi tersebut selesai. Pendekatan ini cocok untuk tugas sederhana dan cepat, tetapi dapat mengakibatkan program menjadi lambat jika harus menunggu I/O atau tugas berat. Selain itu, asynchronous programming memungkinkan aplikasi untuk menjalankan operasi secara bersamaan atau di latar belakang. Ini berarti bahwa eksekusi kode dapat berlanjut tanpa harus menunggu operasi saat ini selesai. Pendekatan ini sangat berguna saat berurusan dengan tugas yang melibatkan I/O, jaringan, atau operasi yang memakan waktu. Untuk mengelola hasil dari operasi asinkron, pengembang dapat menggunakan konsep seperti callback, Promise, atau async/await.
+
+### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma ### event-driven programming. Jelaskan maksud dari paradigma tersebut dan ### sebutkan salah satu contoh penerapannya pada tugas ini.
+Paradigma "event-driven programming" adalah suatu pendekatan dalam pemrograman di mana program merespons peristiwa atau kejadian yang terjadi. Paradigma ini didasarkan pada konsep pemrograman berbasis peristiwa di mana program akan menunggu peristiwa tertentu dan meresponsnya dengan menjalankan tindakan yang sesuai. Dalam konteks tugas ini, paradigma "event-driven programming" diterapkan dengan menggunakan JavaScript dan AJAX. Saat sebuah pengguna melakukan tindakan seperti mengklik tombol "Add Product" atau mengirim permintaan ke server, kode JavaScript menunggu peristiwa tersebut dan meresponsnya dengan mengirim permintaan AJAX. Setelah menerima respons dari server, program akan menampilkan data yang diterima tanpa harus melakukan penyegaran halaman. Dengan demikian, tindakan pengguna memicu peristiwa tertentu, yang direspons secara asinkron dengan bantuan teknik event-driven, menghasilkan interaktivitas yang lebih baik dalam aplikasi web.
+
+### Jelaskan penerapan asynchronous programming pada AJAX.
+Asynchronous programming pada AJAX merujuk pada konsep di mana permintaan dan respons data antara web browser dan server dapat beroperasi secara asinkron, sehingga eksekusi program JavaScript dapat terus berjalan tanpa harus menunggu respons server. Hal ini memungkinkan aplikasi web untuk tetap responsif dan berinteraksi dengan pengguna tanpa terhenti, sehingga kinerja dan responsifitas aplikasi meningkat. Dengan memanfaatkan teknik seperti `XMLHttpRequest` atau `Fetch API`, asynchronous programming memungkinkan pengiriman permintaan dan penanganan respons melalui fungsi callback, memastikan bahwa operasi jaringan tidak mengganggu pengalaman pengguna.
+
+### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API ### daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkan kedua teknologi tersebut, dan sebenarnya teknologi yang lebih baik tergantung pada kebutuhan proyek. Fetch API adalah pilihan modern yang lebih ringan dan lebih fleksibel, terutama jika Anda fokus pada aplikasi web yang lebih mutakhir. Ia mendukung Promises dan memberikan kontrol yang lebih detail dalam mengelola permintaan dan respons. Di sisi lain, jQuery masih relevan terutama jika Anda perlu mendukung browser lama atau menginginkan sintaks yang lebih sederhana. Ia memiliki banyak plugin yang memudahkan pengembangan web, dan sintaksnya mudah dipahami, terutama bagi pemula. Jadi, pemilihan teknologi tergantung pada karakteristik dan kebutuhan proyek yang sedang Anda kerjakan.
+
+## Step by Step Tugas 6
+### Mengubah tugas 5 yang telah dibuat sebelumnya menjadi menggunakan AJAX.
+- Pertama-tama, saya membuat sebuah fungsi view baru untuk menampilkan data berbentuk json. Data tersebut kemudian akan digunakan dalam pengimplementasian AJAX GET untuk menampilkan data seluruh item.
+
+- Saya membuat fungsi view baru untuk menambahkan item baru ke dalam basis data, yang mana saya berikan path berupa `/create-ajax/`. Fungsi ini bernama `add_item_ajax`. Setelah itu, saya menghubungkan form tersebut dengan path yang telah ditentukan. Dengan fungsi ini, user dapat menambahkan item baru tanpa melakukan reload terlebih dahulu.
+
+- Pertama yang saya lakukan adalah mengubah card item yang terhubung langsung dengan objek Item melalui looping menjadi suatu container kosong yang akan menampung Card Item tersebut.
+```<div class="container" id="item_container">```
+
+- Selanjutnya saya akan membuat fungsi asynchronous pada javascript agar proses berjalan pada background dan tidak menunggu proses tersebut selesai.Fungsi asynchronous pertama yang saya buat adalah getItems yang berfungsi untuk mengambil semua object Item dengan implementasi sebagai berikut.
+```
+async function getItems() {
+        return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+    }
+```
+
+- Selanjutnya dengan memanfaatkan fungsi getItems dan id item_container, saya membuat fungsi refreshItem yang akan meloading seluruh item yang didapatkan melalui pemanggilan getItems untuk dimasukkan ke dalam card yang selanjutnya akan disisipkan pada innerHTML item_container. Berikut adalah implementasi dari fungsi refreshItem.
+```
+async function refreshItem() {
+        document.getElementById("item_container").innerHTML = ""
+        const items = await getItems()
+        let htmlString = `
+            <div class="row">`
+
+        items.forEach((item) =>{
+            htmlString += `
+                <div class="col-md-4 mb-4 my-5" data-item-id="${item.pk}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.fields.name}</h5>
+                            <p class="card-text"><strong>Amount:</strong> ${item.fields.amount}</p>
+                            <p class="card-text"><strong>Description:</strong> ${item.fields.description}</p>
+                            <p class="card-text"><strong>Date Added:</strong> ${item.fields.date_added}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="min_amount/${item.pk}" class="btn btn-danger">MIN</a>
+                            <a href="add_amount/${item.pk}" class="btn btn-success">ADD</a>
+                            <a href="edit_data/${item.pk}" class="btn btn-info">EDIT</a>
+                            <a href="delete_data/${item.pk}" class="btn btn-warning">DELETE</a>
+                        </div>
+                    </div>
+                </div>`
+        })
+        htmlString += `\n</div>`
+        document.getElementById("item_container").innerHTML = htmlString
+    }
+```
+
+- Untuk membuat model ini saya akan memanfaatkan fungsi add_item_ajax yang ada pada file views.py agar item yang ditambahkan melalui form dapat disimpan ke dalam database. Agar fungsi add_item_ajax dapat digunakan dalam file html dan scriptnya, kita perlu melakukan routing dengan cara menambahkan path fungsi tersebut kedalam urlpattern yang ada di urls.py
+selanjutnya tambahkan kode berikut ke dalam file HTML yang kita miliki form tersebut sehingga form tersebut akan muncul ketika kita menekan tombol tersebut.
+
+- Selanjutnya kita perlu menghubungkan modal form tersebut dengan suatu fungsi, sehingga ketika kita memasukkan atau melakukan submisi form, data-data yang ada dalam form dapat ditangkap oleh program dan disimpan ke dalam database.
+- Fungsi yang saya buat adalah fungsi addItem fungsi ini akan memanggil fungsi add_item_ajax yang ada pada file views.py sehingga data dapat ditangkap dan disimpan dalam database. Selain itu pada fungsi tersebut saya akan melakukan refresh namun secara asynchronous sehingga tidak seluruh halaman utama di refresh lalu mengosongkan form yang sudah di submit tadi. implementasi code sebagai berikut.
+```
+   function addItem() {
+            fetch("{% url 'main:add_item_ajax' %}", {
+                    method: "POST",
+                    body: new FormData(document.querySelector('#form'))
+                }).then(refreshProductsCards).then(location.reload())
+
+                document.getElementById("form").reset()
+                return false
+            }
+```
+
+- Saya melakukan perintah `collectstatic` dengan `python3 manage.py collectstatic` setelah melakukan beberapa setup pada settings.py. Hal ini bertujuan untuk mengumpulkan seluruh file static yang ada pada seluruh aplikasi yang saya buat dalam proyek ini, lalu saya kumpulkan ke dalam satu folder khusus dengan menjalankan perintah sebagai berikut.
