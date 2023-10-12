@@ -3,20 +3,23 @@
 {% load static %}
 
 {% block content %}
-
-<h1>Edit Product</h1>
-
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Edit Item"/>
-            </td>
-        </tr>
-    </table>
-</form>
+<div class="edit_item text-center">
+    <div class="shadow-lg bg-body mx-auto p-5 text-center" style="max-width: 70%">
+            <h1>Edit Item</h1>
+    
+            <form class="p-4" method="POST">
+                {% csrf_token %}
+                <table class="mx-auto text-center" style="width: 100%;"  >
+                    {{ form.as_table }}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input style="width: 100%;" type="submit" value="Edit Item"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+</div>
+</div>
 
 {% endblock %}
