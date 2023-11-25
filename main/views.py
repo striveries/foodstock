@@ -157,7 +157,6 @@ def get_product_json(request):
     item = Items.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', item))
 
-
 @csrf_exempt
 def add_item_ajax(request):
     if request.method == 'POST':
@@ -192,3 +191,7 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+    
+
+
+
